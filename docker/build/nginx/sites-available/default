@@ -1,0 +1,34 @@
+server {
+    listen                    80 default_server;
+    server_name               _;
+    return                    301 https://$host$request_uri;
+}
+
+server {
+    listen                    443 ssl default_server;
+    server_name               _;
+    charset                   utf-8;
+    keepalive_timeout         70;
+    root                      /app;
+    index                     index.php index.html index.htm;
+    rewrite                   ^/(.*)/$ /$1 permanent;
+
+    ssl_certificate           /etc/ssl/certs/localhost.crt;
+    ssl_certificate_key       /etc/ssl/private/localhost.key;
+    ssl_protocols             SSLv3 TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers               ECDH+AESGCM:DH+AESGCM:ECDH+AES256:DH+AES256:ECDH+AES128:DH+AES:ECDH+3DES:DH+3DES:RSA+AESGCM:RSA+AES:RSA+3DES:!aNULL:!MD$;
+    ssl_prefer_server_ciphers on;
+    ssl_session_cache         shared:SSL:10m;
+    ssl_session_timeout       10m;
+
+    location / {
+        try_files             $uri $uri/ /index.php?$args;
+    }
+
+    location ~ \.php$ {
+        fastcgi_split_path_info ^(.+\.php)(/.+)$;
+        fastcgi_pass            unix:/run/php/php8.1-fpm.sock;
+        fastcgi_index           index.php;
+        include                 fastcgi_params;
+    }
+}

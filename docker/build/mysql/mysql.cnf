@@ -1,0 +1,8 @@
+#
+# The MySQL database client configuration file
+#
+# Ref to https://dev.mysql.com/doc/refman/en/mysql-command-options.html
+
+[mysql]
+
+port = 3306
