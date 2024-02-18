@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+  docupet:
+    tty: true
+    container_name: docupet
+    image: jonbiard/docupet
+    build: .
+    ports:
+      - "80:80"
+      - "443:443"
+      - "3306:3306"
+    volumes:
+      - ./app:/app

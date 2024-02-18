@@ -1,7 +1,7 @@
 #!/bin/bash -eu
 
 # Start services
-service php8.1-fpm restart
+service php8.2-fpm restart
 service nginx restart
 service mysql restart
 

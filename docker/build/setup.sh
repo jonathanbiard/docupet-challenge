@@ -44,7 +44,7 @@ export DEBIAN_FRONTEND=noninteractive
 echo-title "Installing Generic Packages"
 
 apt-get update
-apt-get install -y --no-install-recommends wget unzip curl openssl
+apt-get install -y wget unzip curl openssl software-properties-common
 
 cp -v /build/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 
@@ -52,19 +52,20 @@ cp -v /build/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 
 echo-title "Installing Technology Stack Packages"
 
+add-apt-repository ppa:ondrej/php -y
 apt-get update
 apt-get install -y --no-install-recommends \
   nginx \
   mysql-server \
-  php \
-  php-cli \
-  php-fpm \
-  php-mysql \
-  php-curl \
-  php-gd \
-  php-intl \
-  php-xml \
-  php-zip
+  php8.2 \
+  php8.2-cli \
+  php8.2-curl \
+  php8.2-fpm \
+  php8.2-gd \
+  php8.2-intl \
+  php8.2-mysql \
+  php8.2-xml \
+  php8.2-zip
 
 php /build/php/composer/composer-setup.php
 mv composer.phar /usr/local/bin/composer
@@ -73,11 +74,11 @@ mv composer.phar /usr/local/bin/composer
 
 echo-title "Configuring PHP"
 
-rm -vf /etc/php/8.1/apache2/php.ini
-cp -v /build/php/8.1/apache2/php.ini /etc/php/8.1/apache2/php.ini
+rm -vf /etc/php/8.2/cli/php.ini
+cp -v /build/php/8.2/cli/php.ini /etc/php/8.2/cli/php.ini
 
-rm -vf /etc/php/8.1/fpm/php.ini
-cp -v /build/php/8.1/fpm/php.ini /etc/php/8.1/fpm/php.ini
+rm -vf /etc/php/8.2/fpm/php.ini
+cp -v /build/php/8.2/fpm/php.ini /etc/php/8.2/fpm/php.ini
 
 
 
@@ -130,11 +131,13 @@ mysql -uroot -p"${MYSQL_ROOT_PASSWORD}" --default-character-set=utf8 "${MYSQL_DA
 # Stop the background mysql process
 mysqladmin -uroot -p"${MYSQL_ROOT_PASSWORD}" shutdown
 
+# Change the home directory of the mysql user to avoid a "/nonexistent" error on service start
+usermod -d /var/lib/mysql/ mysql
+
 
 
 echo-title "Performing Final Cleanup"
 
 rm -rf /build
 rm -rf /var/lib/apt/lists/*
-#rm -rf /tmp/phpmyadmin.zip
 echo
