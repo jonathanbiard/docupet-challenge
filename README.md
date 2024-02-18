@@ -6,6 +6,7 @@ Full-stack developer challenge for DocuPet's hiring process.
 - `PHP 8.2` (Installed through PPA with PHP-CLI + PHP-FPM + Composer)
 - `Nginx 1.18.0` (using PHP-FPM unix socket)
 - `MySQL 8.0.36`
+- `Symfony 7.0.3` (with Doctrine)
 
 ## Installation
 1. Install docker for your operating system [here](https://docs.docker.com/engine/install/)
@@ -16,6 +17,8 @@ Full-stack developer challenge for DocuPet's hiring process.
    - If your host ports are occupied by other processes, you may change the first number of each port in the `compose.yaml` file to a free port on the host. For example, using `8080:80` will open up port `8080` on the host and map to port `80` inside the container.
    - If you use a port other than `80` on the host, you will have to access it through `https://localhost:{port}` in the URL
 6. Optionally, enter the container by running `docker compose exec docupet /bin/bash`
+
+_Note that the first time the container runs will need to install project dependencies and initial database migration and seeding. Please check the container's output to know when it has completed._
 
 ## Project Access
 

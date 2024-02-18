@@ -70,6 +70,8 @@ apt-get install -y --no-install-recommends \
 php /build/php/composer/composer-setup.php
 mv composer.phar /usr/local/bin/composer
 
+mkdir /run/php
+
 
 
 echo-title "Configuring PHP"
@@ -124,9 +126,6 @@ mysql -uroot -p"${MYSQL_ROOT_PASSWORD}" -e "FLUSH PRIVILEGES;"
 
 # Create database, if uninitialized
 mysql -uroot -p"${MYSQL_ROOT_PASSWORD}" -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE} DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;"
-
-# Import database data
-mysql -uroot -p"${MYSQL_ROOT_PASSWORD}" --default-character-set=utf8 "${MYSQL_DATABASE}" < "/build/db-schema/docupet.sql"
 
 # Stop the background mysql process
 mysqladmin -uroot -p"${MYSQL_ROOT_PASSWORD}" shutdown
