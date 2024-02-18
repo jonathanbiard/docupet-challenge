@@ -42,6 +42,7 @@
         "symfony/ux-vue": "^2.14",
         "symfony/validator": "7.0.*",
         "symfony/web-link": "7.0.*",
+        "symfony/webpack-encore-bundle": "^2.1",
         "symfony/yaml": "7.0.*",
         "symfonycasts/sass-bundle": "^0.5.1",
         "twbs/bootstrap": "^5.3",

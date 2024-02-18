@@ -1,0 +1,21 @@
+{
+  "devDependencies": {
+    "@symfony/webpack-encore": "^4.6.1",
+    "bootstrap": "^5.3.2",
+    "core-js": "^3.36.0",
+    "sass": "^1.71.0",
+    "sass-loader": "^14.1.0",
+    "vue": "^3.4.19",
+    "vue-loader": "^17.4.2",
+    "vue-template-compiler": "^2.7.16",
+    "webpack-notifier": "^1.15.0"
+  },
+  "scripts": {
+    "dev-server": "encore dev-server",
+    "dev": "encore dev",
+    "watch": "encore dev --watch",
+    "build": "encore production --progress"
+  },
+  "dependencies": {
+  }
+}

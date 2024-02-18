@@ -72,6 +72,10 @@ mv composer.phar /usr/local/bin/composer
 
 mkdir /run/php
 
+curl -fsSL https://deb.nodesource.com/setup_21.x | bash - && apt-get install -y nodejs
+curl -1sLf 'https://dl.cloudsmith.io/public/symfony/stable/setup.deb.sh' | bash && apt-get install -y symfony-cli
+
+symfony server:ca:install
 
 
 echo-title "Configuring PHP"
