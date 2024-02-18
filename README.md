@@ -5,7 +5,7 @@ Full-stack developer challenge for DocuPet's hiring process.
 - `Ubuntu:latest` docker image
 - `PHP 8.2` (Installed through PPA with PHP-CLI + PHP-FPM + Composer)
 - `Nginx 1.18.0` (using PHP-FPM unix socket)
-- `MySQL 8.0.36`
+- `MySQL 8.0.36` (DocuPet's preferred relational database)
 - `Symfony 7.0.3` (with Doctrine)
 
 ## Installation
