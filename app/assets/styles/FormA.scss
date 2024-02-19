@@ -1,0 +1,49 @@
+@import "~bootstrap";
+@import "~bootstrap/scss/variables";
+
+.form-area {
+    background-color: $white;
+    border-radius: 6px;
+    border: 1px solid $gray-300;
+    box-shadow: 1px 1px 5px 0 $gray-400;
+    min-height: 300px;
+
+    .paw-trail {
+        width: 400px;
+    }
+
+    .tell-us-title {
+        color: $blue-700;
+        font-weight: bold;
+    }
+
+    #breed {
+        border-right: 0;
+    }
+
+    .search-icon-container {
+        background-color: #fff;
+        border-left: 0;
+        border-radius: 0 6px 6px 0 !important;
+    }
+
+    .search-icon {
+        width: 16px;
+    }
+
+    .continue-button {
+        color: $white;
+        border: 1px solid darken(#00A0E1, 5);
+        background-color: #00A0E1;
+
+        &:hover {
+            border: 1px solid darken(#00A0E1, 10);
+            background-color: darken(#00A0E1, 5);
+        }
+
+        &:active {
+            border: 1px solid darken(#00A0E1, 15);
+            background-color: darken(#00A0E1, 10) !important;
+        }
+    }
+}

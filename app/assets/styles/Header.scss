@@ -1,0 +1,23 @@
+@import "~bootstrap";
+@import "~bootstrap/scss/variables";
+
+.help-save-text {
+    font-size: .75rem;
+
+    .help a {
+        color: $gray-700;
+    }
+
+    .save a {
+        color: $cyan-500;
+    }
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.content-area {
+    background-color: $gray-200;
+    border-top: 3px solid $gray-300;
+}
