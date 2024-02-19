@@ -23,6 +23,9 @@ class Pet
     #[ORM\JoinColumn(name: "breed", referencedColumnName: "id", onDelete: "CASCADE")]
     private ?Breed $breed = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $breedMix = null;
+
     #[ORM\Column(length: 128)]
     private ?string $name = null;
 
@@ -111,11 +114,13 @@ class Pet
     {
         return [
             'id' => $this->id,
-            'breed' => $this->breed,
+            'breed' => $this->breed?->getName(),
+            'breedMix' => $this->breedMix,
             'name' => $this->name,
             'age' => $this->age,
-            'birthday' => $this->birthday,
-            'gender' => $this->gender,
+            'birthday' => $this->birthday?->format('Y-m-d'),
+            'gender' => ucfirst($this->gender),
+            'isDangerous' => $this->breed?->isIsDangerous(),
         ];
     }
 }

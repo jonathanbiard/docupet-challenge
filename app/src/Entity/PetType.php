@@ -13,7 +13,7 @@ class PetType
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: Types::SMALLINT)]
-    #[ORM\OneToMany(targetEntity: "Breed", mappedBy: "breed")]
+    #[ORM\OneToMany(targetEntity: "Breed", mappedBy: "pet_type")]
     private ?int $id = null;
 
     #[ORM\Column(length: 32)]

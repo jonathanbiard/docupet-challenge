@@ -1,5 +1,5 @@
 <script setup>
-    import { onMounted } from 'vue'
+    import CurrentPets from "../components/CurrentPets.vue";
     import Header from '../components/Header.vue'
     import FormA from '../components/FormA.vue'
     import Footer from '../components/Footer.vue'
@@ -18,10 +18,9 @@
         <div class="row">
             <div class="col">
                 <FormA/>
+                <CurrentPets v-bind:pets="pets"/>
                 <Footer/>
             </div>
         </div>
     </div>
-    <!--  FIXME: The breed of each pet is just an empty object  -->
-    <pre>{{ JSON.stringify(pets, null, 4) }}</pre>
 </template>

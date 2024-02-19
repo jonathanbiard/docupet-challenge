@@ -1,6 +1,8 @@
 # DocuPet Full-Stack Coding Challenge
 Full-stack developer challenge for DocuPet's hiring process.
 
+See the specs [here](docupet-full-stack-coding-test.pdf)
+
 ## Packages
 - `Ubuntu:latest` docker image
 - `PHP 8.2` (Installed through PPA with PHP-CLI + PHP-FPM + Composer)
@@ -48,6 +50,7 @@ You may connect to mysql via the host at port `3306` or whichever port you decid
 ## Other Notes
 - A bare Ubuntu image was used in order to showcase that the entire stack was provisioned and configured from scratch, such as Nginx, PHP, MySQL, and the project root. Otherwise, in a business environment, using a ready-made image would be a smarter choice to get a better-tested and freely-evolving image for less development time investment.
 - All configuration files related to provisioning are available in the `/docker` directory for inspection.
+- The UI mock-up did not mention the pet type so some artistic liberties were taken to implement it consistently with the rest of the UI.
 
 ## Possible Improvements
 - Ideally, containers would only have one process running in each and they would be networked and orchestrated with docker-compose. The current solution was encapsulated in a single container as that's what the challenge document seemed to request. The size of the image could be smaller and more performant if optimized images were used.
