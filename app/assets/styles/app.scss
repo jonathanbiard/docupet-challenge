@@ -1,0 +1,65 @@
+@import "~bootstrap";
+@import "~bootstrap/scss/variables";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+    font-family: "Roboto", "Arial", sans-serif;
+}
+
+.help-save-text {
+    font-size: .75rem;
+
+    .help a {
+        color: $gray-700;
+    }
+
+    .save a {
+        color: $cyan-500;
+    }
+
+    a {
+        text-decoration: none;
+    }
+}
+
+.content-area {
+    background-color: $gray-200;
+    border-top: 3px solid $gray-300;
+}
+
+.form-area {
+    background-color: $white;
+    border-radius: 6px;
+    border: 1px solid $gray-300;
+    box-shadow: 1px 1px 5px 0 $gray-400;
+    min-height: 300px;
+
+    .paw-trail {
+        width: 400px;
+    }
+
+    .tell-us-title {
+        color: $blue-700;
+        font-weight: bold;
+    }
+
+    .search-icon {
+        width: 16px;
+    }
+
+    .continue-button {
+        color: $white;
+        border: 1px solid darken(#00A0E1, 5);
+        background-color: #00A0E1;
+
+        &:hover {
+            border: 1px solid darken(#00A0E1, 10);
+            background-color: darken(#00A0E1, 5);
+        }
+
+        &:active {
+            border: 1px solid darken(#00A0E1, 15);
+            background-color: darken(#00A0E1, 10) !important;
+        }
+    }
+}
