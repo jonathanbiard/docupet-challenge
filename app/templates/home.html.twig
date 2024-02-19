@@ -1,5 +1,5 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div id="app" data-random-number-from-php="{{ randomNumber }}"></div>
+    <div id="app" data-pets="{{ pets | json_encode }}"></div>
 {% endblock %}

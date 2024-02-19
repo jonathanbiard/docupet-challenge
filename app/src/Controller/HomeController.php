@@ -1,16 +1,18 @@
 <?php
 namespace App\Controller;
 
-use App\Models\Helpers;
+use App\Repository\PetRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-    public function index(): Response
+    public function index(PetRepository $petRepository): Response
     {
+        $results = $petRepository->findAll();
+
         return $this->render('home.html.twig', [
-            'randomNumber' => Helpers::getRandomInteger(),
+            'pets' => PetRepository::toArray($results),
         ]);
     }
 }
