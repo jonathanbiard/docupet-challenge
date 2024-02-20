@@ -4,10 +4,13 @@
 
     defineProps({});
 
+    const emit = defineEmits(['addPet'])
+
     const petType = ref(null)
     const name = ref('')
     const breed = ref('')
     const unknownBreed = ref(null)
+    const mixedBreed = ref('')
     const gender = ref(null)
     const birthdayKnown = ref(null)
     const age = ref(null)
@@ -24,8 +27,27 @@
         birthdayKnown.value = newValue;
     }
 
+    const formToPet = () => {
+        return {
+            id: 1,
+            breed: breed.value !== '' ? breed.value : null,
+            breedMix: unknownBreed.value === 'mixed' ? mixedBreed.value : null,
+            name: name.value,
+            age: birthdayKnown.value === 'no' ? age.value : null,
+            birthday: birthdayKnown.value === 'yes'
+                ? `${birthDay.value.toString().padStart(2, '0')}` +
+                    `-${birthMonth.value.toString().padStart(2, '0')}` +
+                    `-${birthYear.value.toString()}`
+                : null,
+            gender: gender.value,
+        }
+    }
+
     const handleSave = () => {
         saveInProgress.value = true
+
+        // TODO: Call the API service to persist to the database
+        emit('addPet', formToPet())
 
         setTimeout(() => {
             saveInProgress.value = false
@@ -117,26 +139,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="row justify-content-center">
-                    <div class="col-10 fs-6 mt-3">
-                        Choose One
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-10 mt-2">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="unknownBreed" id="unknownBreedUnknown" value="unknown" v-model="unknownBreed">
-                            <label class="form-check-label" for="unknownBreedUnknown">I don't know</label>
-                        </div>
-                        <div class="form-check mt-2">
-                            <input class="form-check-input" type="radio" name="unknownBreed" id="unknownBreedMixed" value="mixed" v-model="unknownBreed">
-                            <label class="form-check-label" for="unknownBreedMixed">It's a mix</label>
+                <div v-if="breed === ''">
+                    <div class="row justify-content-center">
+                        <div class="col-10 fs-6 mt-3">
+                            Choose One
                         </div>
                     </div>
-                </div>
-                <div class="row justify-content-center">
-                    <div class="col-10 mt-2">
-                        <input type="text" class="form-control" id="mixedBreed" placeholder="E.g.: Collie, poodle, lab" :disabled="unknownBreed !== 'mixed'">
+                    <div class="row justify-content-center">
+                        <div class="col-10 mt-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="unknownBreed" id="unknownBreedUnknown" value="unknown" v-model="unknownBreed">
+                                <label class="form-check-label" for="unknownBreedUnknown">I don't know</label>
+                            </div>
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="radio" name="unknownBreed" id="unknownBreedMixed" value="mixed" v-model="unknownBreed">
+                                <label class="form-check-label" for="unknownBreedMixed">It's a mix</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-10 mt-2">
+                            <input type="text" class="form-control" id="mixedBreed" placeholder="E.g.: Collie, poodle, lab" :disabled="unknownBreed !== 'mixed'" v-model="mixedBreed">
+                        </div>
                     </div>
                 </div>
                 <div class="row">

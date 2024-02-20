@@ -1,4 +1,5 @@
 <script setup>
+    import { ref } from 'vue'
     import CurrentPets from "../components/CurrentPets.vue";
     import Header from '../components/Header.vue'
     import FormA from '../components/FormA.vue'
@@ -9,7 +10,11 @@
     defineProps({});
 
     // Load data from server-side render (SSR) on initial load to avoid an ajax call
-    const pets = JSON.parse(document.querySelector("#app").getAttribute('data-pets'))
+    const pets = ref(JSON.parse(document.querySelector("#app").getAttribute('data-pets')))
+
+    const addPet = (newPet) => {
+        pets.value = [ ...pets.value, newPet ]
+    }
 </script>
 
 <template>
@@ -17,7 +22,7 @@
     <div class="container-fluid content-area mt-3">
         <div class="row">
             <div class="col">
-                <FormA/>
+                <FormA @add-pet="addPet"/>
                 <CurrentPets v-bind:pets="pets"/>
                 <Footer/>
             </div>
