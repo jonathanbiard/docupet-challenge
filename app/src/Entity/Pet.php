@@ -20,7 +20,7 @@ class Pet
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: "Breed", inversedBy: "id")]
-    #[ORM\JoinColumn(name: "breed", referencedColumnName: "id", onDelete: "CASCADE")]
+    #[ORM\JoinColumn(name: "breed", referencedColumnName: "id", nullable: true, onDelete: "CASCADE")]
     private ?Breed $breed = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -55,11 +55,21 @@ class Pet
         return $this->breed;
     }
 
-    public function setBreed(Breed $breed): static
+    public function setBreed(?Breed $breed): static
     {
         $this->breed = $breed;
 
         return $this;
+    }
+
+    public function getBreedMix(): ?string
+    {
+        return $this->breedMix;
+    }
+
+    public function setBreedMix(?string $breedMix): void
+    {
+        $this->breedMix = $breedMix;
     }
 
     public function getName(): ?string

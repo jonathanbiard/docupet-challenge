@@ -1,10 +1,23 @@
 <script setup>
     import { ref } from 'vue'
     import '../styles/FormA.scss'
+    import PetService from "../services/PetService";
 
-    defineProps({});
+    const props = defineProps({
+        breeds: {
+            type: Array,
+            default() {
+                return {
+                    id: Number,
+                    petType: String,
+                    name: String,
+                    isDangerous: Boolean,
+                }
+            }
+        }
+    });
 
-    const emit = defineEmits(['addPet'])
+    const emit = defineEmits(['reloadPets'])
 
     const petType = ref(null)
     const name = ref('')
@@ -17,6 +30,7 @@
     const birthDay = ref(null)
     const birthMonth = ref(null)
     const birthYear = ref(null)
+    const showComplexBreedsSection = ref(true)
     const saveInProgress = ref(false)
 
     const handleGenderClick = (newValue) => {
@@ -27,32 +41,46 @@
         birthdayKnown.value = newValue;
     }
 
+    const handleBreedBlur = () => {
+        if (!props.breeds.find((b) => b.name === breed.value)) {
+            breed.value = ''
+            showComplexBreedsSection.value = true
+        }
+
+        if (breed.value) {
+            unknownBreed.value = null
+            mixedBreed.value = null
+            showComplexBreedsSection.value = false
+        }
+    }
+
     const formToPet = () => {
         return {
             id: 1,
             breed: breed.value !== '' ? breed.value : null,
-            breedMix: unknownBreed.value === 'mixed' ? mixedBreed.value : null,
+            breedMix: unknownBreed.value === 'mixed' ? mixedBreed.value : '[Unknown]',
             name: name.value,
             age: birthdayKnown.value === 'no' ? age.value : null,
             birthday: birthdayKnown.value === 'yes'
-                ? `${birthDay.value.toString().padStart(2, '0')}` +
+                ? `${birthYear.value.toString()}` +
                     `-${birthMonth.value.toString().padStart(2, '0')}` +
-                    `-${birthYear.value.toString()}`
+                    `-${birthDay.value.toString().padStart(2, '0')}`
                 : null,
             gender: gender.value,
         }
     }
 
-    const handleSave = () => {
+    const handleSave = async () => {
         saveInProgress.value = true
 
-        // TODO: Call the API service to persist to the database
-        emit('addPet', formToPet())
+        const saveResult = await PetService.save(formToPet())
 
-        setTimeout(() => {
-            saveInProgress.value = false
+        if (saveResult) {
+            emit('reloadPets')
             resetForm()
-        }, 2000)
+        }
+
+        saveInProgress.value = false
     }
 
     const resetForm = () => {
@@ -60,6 +88,7 @@
         name.value = ''
         breed.value = ''
         unknownBreed.value = null
+        mixedBreed.value = ''
         gender.value = null
         birthdayKnown.value = null
         age.value = null
@@ -122,24 +151,28 @@
                 <div class="row">
                     <div class="col">
                         <div class="input-group">
-                            <input type="text" class="form-control" list="breedOptions" id="breed" placeholder="Can't find it?" v-model="breed">
+                            <input
+                                type="text"
+                                class="form-control"
+                                list="breedOptions"
+                                id="breed"
+                                :placeholder="petType ? `Can't find your ${petType.toLowerCase()}'s breed?` : ''"
+                                v-model="breed"
+                                :disabled="!petType"
+                                @blur="handleBreedBlur"
+                            >
                             <span class="input-group-text search-icon-container" id="breed-addon">
                                 <img class="search-icon" src="/images/search-icon.svg" alt="Search"/>
                             </span>
                             <datalist id="breedOptions">
-                                <option value="Siamese"/>
-                                <option value="Persian"/>
-                                <option value="House"/>
-                                <option value="Tiger"/>
-                                <option value="Golden Retriever"/>
-                                <option value="Border Collie"/>
-                                <option value="Labrador"/>
-                                <option value="Wolf"/>
+                                <option v-for="breed in breeds.filter((b) => b.petType === petType)" :value="breed.name">
+                                    {{ breed.name }}
+                                </option>
                             </datalist>
                         </div>
                     </div>
                 </div>
-                <div v-if="breed === ''">
+                <div v-if="showComplexBreedsSection">
                     <div class="row justify-content-center">
                         <div class="col-10 fs-6 mt-3">
                             Choose One
@@ -224,26 +257,7 @@
                     <div class="row">
                         <div class="col">
                             <select class="form-select" id="age" v-model="age">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                                <option value="11">11</option>
-                                <option value="12">12</option>
-                                <option value="13">13</option>
-                                <option value="14">14</option>
-                                <option value="15">15</option>
-                                <option value="16">16</option>
-                                <option value="17">17</option>
-                                <option value="18">18</option>
-                                <option value="19">19</option>
-                                <option value="20">20</option>
+                                <option v-for="index in 20" :value="index">{{ index }}</option>
                             </select>
                         </div>
                     </div>

@@ -73,4 +73,14 @@ class Breed
 
         return $this;
     }
+
+    public function getAsArray(): ?array
+    {
+        return [
+            'id' => $this->id,
+            'petType' => $this->pet_type->getName(),
+            'name' => $this->name,
+            'isDangerous' => $this->is_dangerous,
+        ];
+    }
 }

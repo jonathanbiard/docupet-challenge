@@ -1,5 +1,5 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div id="app" data-pets="{{ pets | json_encode }}"></div>
+    <div id="app" data-pets="{{ pets | json_encode }}" data-breeds="{{ breeds | json_encode }}"></div>
 {% endblock %}

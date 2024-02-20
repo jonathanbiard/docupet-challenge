@@ -21,6 +21,21 @@ class BreedRepository extends ServiceEntityRepository
         parent::__construct($registry, Breed::class);
     }
 
+    /**
+     * @param Breed[] $results
+     * @return array
+     */
+    public static function toArray(array $results): array
+    {
+        $breeds = [];
+
+        foreach ($results as $result) {
+            $breeds[] = $result->getAsArray();
+        }
+
+        return $breeds;
+    }
+
 //    /**
 //     * @return Breed[] Returns an array of Breed objects
 //     */

@@ -2,6 +2,7 @@
     import '../styles/CurrentPets.scss'
 
     defineProps({
+        isLoading: Boolean,
         pets: {
             type: Object,
             default() {
@@ -29,7 +30,12 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-auto mb-5 py-4 px-5 table-area">
-                <table class="table">
+                <div v-if="isLoading" class="d-flex justify-content-center">
+                    <div class="spinner-border text-info" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <table v-else class="table">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
