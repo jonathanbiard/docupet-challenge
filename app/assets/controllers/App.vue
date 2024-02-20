@@ -30,8 +30,14 @@
     <div class="container-fluid content-area mt-3">
         <div class="row">
             <div class="col">
-                <FormA @reload-pets="reloadPets" v-bind:breeds="breeds"/>
-                <CurrentPets v-bind:is-loading="isLoading" v-bind:pets="pets"/>
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <FormA @reload-pets="reloadPets" v-bind:breeds="breeds"/>
+                    </div>
+                    <div class="col-auto">
+                        <CurrentPets v-bind:is-loading="isLoading" v-bind:pets="pets"/>
+                    </div>
+                </div>
                 <Footer/>
             </div>
         </div>

@@ -32,6 +32,7 @@
     const birthYear = ref(null)
     const showComplexBreedsSection = ref(true)
     const saveInProgress = ref(false)
+    const saveErrorCode = ref(0)
 
     const handleGenderClick = (newValue) => {
         gender.value = newValue;
@@ -75,9 +76,11 @@
 
         const saveResult = await PetService.save(formToPet())
 
-        if (saveResult) {
+        if (saveResult === 0) {
             emit('reloadPets')
             resetForm()
+        } else {
+            saveErrorCode.value = saveResult
         }
 
         saveInProgress.value = false
@@ -138,7 +141,7 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input type="text" class="form-control" id="petName" v-model="name">
+                        <input type="text" class="form-control" :class="{ 'is-invalid': saveErrorCode === 1 }" id="petName" v-model="name">
                     </div>
                 </div>
                 <div class="row">

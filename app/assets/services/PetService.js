@@ -55,14 +55,16 @@ const PetService = {
                 },
             })
 
+            console.log(result)
+
             if (result.status === 201) {
-                return true
+                return 0
+            } else {
+                return result.data ? result.data.errorCode : 100
             }
         } catch (error) {
-            // let it return false below...
+            return error.response.data.errorCode ? error.response.data.errorCode : 101
         }
-
-        return false
     }
 }
 

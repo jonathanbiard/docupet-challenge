@@ -24,12 +24,7 @@
 <template>
     <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col-auto mb-2 fs-3">
-                Current Pets
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-auto mb-5 py-4 px-5 table-area">
+            <div class="col-auto table-area my-5 px-5 pt-4 pb-5">
                 <div v-if="isLoading" class="d-flex justify-content-center">
                     <div class="spinner-border text-info" role="status">
                         <span class="visually-hidden">Loading...</span>

@@ -53,6 +53,8 @@ You may connect to mysql via the host at port `3306` or whichever port you decid
 - The UI mock-up did not mention the pet type so some artistic liberties were taken to implement it consistently with the rest of the UI.
 
 ## Possible Improvements
-- Ideally, containers would only have one process running in each and they would be networked and orchestrated with docker-compose. The current solution was encapsulated in a single container as that's what the challenge document seemed to request. The size of the image could be smaller and more performant if optimized images were used.
+- Ideally, containers would only have one process running in each, and they would be networked and orchestrated with docker-compose. The current solution was encapsulated in a single container as that's what the challenge document seemed to request. The size of the image could be smaller and more performant if optimized images were used.
 - A standalone solution such as PhpMyAdmin or Adminer would be good to offer for a no-setup database access for reviewers.
 - Using Typescript instead of plain Javascript to gain strong typing and catch errors during the build rather than at runtime.
+- Add better error-catching from the server-side when saving a new pet. It is only currently on the `name` field to show how it would be implemented. The rest can be seen from the error codes returned by the API call.
+- Not much time was spent on responsiveness, so it could definitely be improved.
