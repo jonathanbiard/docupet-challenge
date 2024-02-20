@@ -31,26 +31,25 @@ See the specs [here](docupet-full-stack-coding-test.pdf)
 
 ## Project Access
 
-You may now load the project through the Symfony web server at:
-
-https://localhost:8000
-
-Alternatively, you may also load the project through the Nginx+PHP-FPM web server configuration at:
+You may now load the project through the Nginx+PHP-FPM web server configuration at:
 
 https://localhost
 
-_Note that SSL through HTTPS is voluntarily forced with either web server and you may need to allow the self-signed certificates from your browser._
+Alternatively, you may also load the project through the Symfony web server at:
+
+https://localhost:8000
+
+_Note that SSL through HTTPS is voluntarily forced with either web server, and you may need to allow the self-signed certificates from your browser._
 
 ## MySQL Access
 
-MySQL has been set up with user:pass `docupet`:`docupet` and allows external connections so you can connect from the host with your preferred tool, such as the database extension in Jetbrains products or MySQL Workbench.
-
-You may connect to mysql via the host at port `3306` or whichever port you decide to open on the host in the `docker run` command. 
+MySQL has been set up with user:pass `docupet`:`docupet` and allows external connections, so you can connect from the host at port `3306` with your preferred tool, such as the database extension in Jetbrains products or MySQL Workbench.
 
 ## Other Notes
-- A bare Ubuntu image was used in order to showcase that the entire stack was provisioned and configured from scratch, such as Nginx, PHP, MySQL, and the project root. Otherwise, in a business environment, using a ready-made image would be a smarter choice to get a better-tested and freely-evolving image for less development time investment.
+- A bare Ubuntu image was used in order to showcase that the entire stack was provisioned and configured from scratch, such as Nginx, PHP, MySQL, and the project root and dependencies. Otherwise, in a business environment, using a ready-made image would be a smarter choice to get a better-tested and freely-evolving image for less development time investment.
 - All configuration files related to provisioning are available in the `/docker` directory for inspection.
-- The UI mock-up did not mention the pet type so some artistic liberties were taken to implement it consistently with the rest of the UI.
+- All project files related to Symfony and Vue are available in the `/app` directory for inspection.
+- The UI mock-up did not mention the pet type so some artistic liberties were taken to implement it consistently with the rest of the UI. The same was done for the birthday/age questions since they were not originally in the mocked up form.
 
 ## Possible Improvements
 - Ideally, containers would only have one process running in each, and they would be networked and orchestrated with docker-compose. The current solution was encapsulated in a single container as that's what the challenge document seemed to request. The size of the image could be smaller and more performant if optimized images were used.

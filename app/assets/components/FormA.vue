@@ -59,7 +59,7 @@
         return {
             id: 1,
             breed: breed.value !== '' ? breed.value : null,
-            breedMix: unknownBreed.value === 'mixed' ? mixedBreed.value : '[Unknown]',
+            breedMix: breed.value === '' ? (unknownBreed.value === 'mixed' ? mixedBreed.value : '[Unknown]') : null,
             name: name.value,
             age: birthdayKnown.value === 'no' ? age.value : null,
             birthday: birthdayKnown.value === 'yes'
@@ -98,6 +98,8 @@
         birthDay.value = null
         birthMonth.value = null
         birthYear.value = null
+        showComplexBreedsSection.value = true
+        saveErrorCode.value = 0
     }
 </script>
 
